@@ -53,7 +53,7 @@ Module {
 		fileTags: ['version']
 	}
 
-	cpp.includePaths: [exportingProduct.buildDirectory]
+	cpp.includePaths: [product.buildDirectory]
 
 	Probe {
 		id: versionProbe
