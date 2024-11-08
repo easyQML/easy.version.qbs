@@ -6,7 +6,10 @@ import qbs.File
 import qbs.FileInfo
 import qbs.TextFile
 
-Product {
+Module {
+	additionalProductTypes: ['text']
+
+	Depends { name: 'cpp' }
 	Depends { name: 'texttemplate' }
 
 	version: versionProbe.version
@@ -50,18 +53,7 @@ Product {
 		fileTags: ['version']
 	}
 
-	Export {
-		version: exportingProduct.version
-		readonly property string threeDigits: exportingProduct.threeDigits
-		readonly property string twoDigits: exportingProduct.twoDigits
-		readonly property string variant: exportingProduct.variant
-		readonly property string variantLetter: exportingProduct.variantLetter
-		readonly property string variantNumber: exportingProduct.variantNumber
-		readonly property string primitive: exportingProduct.primitive
-
-		Depends { name: 'cpp' }
-		cpp.includePaths: [exportingProduct.buildDirectory]
-	}
+	cpp.includePaths: [exportingProduct.buildDirectory]
 
 	Probe {
 		id: versionProbe
@@ -80,7 +72,6 @@ Product {
 		}
 	}
 
-	type: ['text']
 	texttemplate.dict: ({
 		version: version,
 		twoDigits: twoDigits,
